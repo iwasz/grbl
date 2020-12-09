@@ -19,6 +19,9 @@
 */
 #ifndef report_h
 #define report_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Define Grbl status codes. Valid values (0-255)
 #define STATUS_OK 0
@@ -61,15 +64,15 @@
 #define STATUS_GCODE_MAX_VALUE_EXCEEDED 38
 
 // Define Grbl alarm codes. Valid values (1-255). 0 is reserved.
-#define ALARM_HARD_LIMIT_ERROR      EXEC_ALARM_HARD_LIMIT
-#define ALARM_SOFT_LIMIT_ERROR      EXEC_ALARM_SOFT_LIMIT
-#define ALARM_ABORT_CYCLE           EXEC_ALARM_ABORT_CYCLE
-#define ALARM_PROBE_FAIL_INITIAL    EXEC_ALARM_PROBE_FAIL_INITIAL
-#define ALARM_PROBE_FAIL_CONTACT    EXEC_ALARM_PROBE_FAIL_CONTACT
-#define ALARM_HOMING_FAIL_RESET     EXEC_ALARM_HOMING_FAIL_RESET
-#define ALARM_HOMING_FAIL_DOOR      EXEC_ALARM_HOMING_FAIL_DOOR
-#define ALARM_HOMING_FAIL_PULLOFF   EXEC_ALARM_HOMING_FAIL_PULLOFF
-#define ALARM_HOMING_FAIL_APPROACH  EXEC_ALARM_HOMING_FAIL_APPROACH
+#define ALARM_HARD_LIMIT_ERROR EXEC_ALARM_HARD_LIMIT
+#define ALARM_SOFT_LIMIT_ERROR EXEC_ALARM_SOFT_LIMIT
+#define ALARM_ABORT_CYCLE EXEC_ALARM_ABORT_CYCLE
+#define ALARM_PROBE_FAIL_INITIAL EXEC_ALARM_PROBE_FAIL_INITIAL
+#define ALARM_PROBE_FAIL_CONTACT EXEC_ALARM_PROBE_FAIL_CONTACT
+#define ALARM_HOMING_FAIL_RESET EXEC_ALARM_HOMING_FAIL_RESET
+#define ALARM_HOMING_FAIL_DOOR EXEC_ALARM_HOMING_FAIL_DOOR
+#define ALARM_HOMING_FAIL_PULLOFF EXEC_ALARM_HOMING_FAIL_PULLOFF
+#define ALARM_HOMING_FAIL_APPROACH EXEC_ALARM_HOMING_FAIL_APPROACH
 
 // Define Grbl feedback message codes. Valid values (0-255).
 #define MESSAGE_CRITICAL_EVENT 1
@@ -85,47 +88,50 @@
 #define MESSAGE_SLEEP_MODE 11
 
 // Prints system status messages.
-void report_status_message(uint8_t status_code);
+void report_status_message (uint8_t status_code);
 
 // Prints system alarm messages.
-void report_alarm_message(uint8_t alarm_code);
+void report_alarm_message (uint8_t alarm_code);
 
 // Prints miscellaneous feedback messages.
-void report_feedback_message(uint8_t message_code);
+void report_feedback_message (uint8_t message_code);
 
 // Prints welcome message
-void report_init_message();
+void report_init_message ();
 
 // Prints Grbl help and current global settings
-void report_grbl_help();
+void report_grbl_help ();
 
 // Prints Grbl global settings
-void report_grbl_settings();
+void report_grbl_settings ();
 
 // Prints an echo of the pre-parsed line received right before execution.
-void report_echo_line_received(char *line);
+void report_echo_line_received (char *line);
 
 // Prints realtime status report
-void report_realtime_status();
+void report_realtime_status ();
 
 // Prints recorded probe position
-void report_probe_parameters();
+void report_probe_parameters ();
 
 // Prints Grbl NGC parameters (coordinate offsets, probe)
-void report_ngc_parameters();
+void report_ngc_parameters ();
 
 // Prints current g-code parser mode state
-void report_gcode_modes();
+void report_gcode_modes ();
 
 // Prints startup line when requested and executed.
-void report_startup_line(uint8_t n, char *line);
-void report_execute_startup_message(char *line, uint8_t status_code);
+void report_startup_line (uint8_t n, char *line);
+void report_execute_startup_message (char *line, uint8_t status_code);
 
 // Prints build info and user info
-void report_build_info(char *line);
+void report_build_info (char *line);
 
 #ifdef DEBUG
-  void report_realtime_debug();
+void report_realtime_debug ();
 #endif
 
+#ifdef __cplusplus
+}
+#endif
 #endif

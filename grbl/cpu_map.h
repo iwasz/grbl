@@ -24,6 +24,7 @@
 
 #ifndef cpu_map_h
 #define cpu_map_h
+#include <zephyr.h>
 
 #ifdef CPU_MAP_ATMEGA328P // (Arduino Uno) Officially supported by Grbl.
 
@@ -255,33 +256,61 @@
 #endif
 */
 
-#ifdef CPU_MAP_ZEPHYR_GRBL_PLOTTER_NUCLEO_743ZI // (Arduino Uno) Officially supported by Grbl.
+#ifdef CPU_MAP_ZEPHYR_GRBL_PLOTTER_NUCLEO_743ZI
 
 // Define serial port pins and interrupt vectors.
 #define SERIAL_RX USART_RX_vect
 #define SERIAL_UDRE USART_UDRE_vect
 
-// Define step pulse output pins. NOTE: All step bit pins must be on the same port.
-#define STEP_DDR DDRD
-#define STEP_PORT PORTD
-#define X_STEP_BIT 2                                                          // Uno Digital Pin 2
-#define Y_STEP_BIT 3                                                          // Uno Digital Pin 3
-#define Z_STEP_BIT 4                                                          // Uno Digital Pin 4
-#define STEP_MASK ((1 << X_STEP_BIT) | (1 << Y_STEP_BIT) | (1 << Z_STEP_BIT)) // All step bits
+// TODO change names from MOTOR1 to MOTORX etc
+#define MOTORX_DIR_NODE DT_PATH (motor1_pins, dir)
+#define MOTORX_DIR_LABEL DT_GPIO_LABEL (MOTORX_DIR_NODE, gpios)
+#define MOTORX_DIR_PIN DT_GPIO_PIN (MOTORX_DIR_NODE, gpios)
+#define MOTORX_DIR_FLAGS DT_GPIO_FLAGS (MOTORX_DIR_NODE, gpios)
 
-// Define step direction output pins. NOTE: All direction pins must be on the same port.
-#define DIRECTION_DDR DDRD
-#define DIRECTION_PORT PORTD
-#define X_DIRECTION_BIT 5                                                                         // Uno Digital Pin 5
-#define Y_DIRECTION_BIT 6                                                                         // Uno Digital Pin 6
-#define Z_DIRECTION_BIT 7                                                                         // Uno Digital Pin 7
-#define DIRECTION_MASK ((1 << X_DIRECTION_BIT) | (1 << Y_DIRECTION_BIT) | (1 << Z_DIRECTION_BIT)) // All direction bits
+#define MOTORX_STEP_NODE DT_PATH (motor1_pins, step)
+#define MOTORX_STEP_LABEL DT_GPIO_LABEL (MOTORX_STEP_NODE, gpios)
+#define MOTORX_STEP_PIN DT_GPIO_PIN (MOTORX_STEP_NODE, gpios)
+#define MOTORX_STEP_FLAGS DT_GPIO_FLAGS (MOTORX_STEP_NODE, gpios)
 
-// Define stepper driver enable/disable output pin.
-#define STEPPERS_DISABLE_DDR DDRB
-#define STEPPERS_DISABLE_PORT PORTB
-#define STEPPERS_DISABLE_BIT 0 // Uno Digital Pin 8
-#define STEPPERS_DISABLE_MASK (1 << STEPPERS_DISABLE_BIT)
+#define MOTORX_ENABLE_NODE DT_PATH (motor1_pins, enable)
+#define MOTORX_ENABLE_LABEL DT_GPIO_LABEL (MOTORX_ENABLE_NODE, gpios)
+#define MOTORX_ENABLE_PIN DT_GPIO_PIN (MOTORX_ENABLE_NODE, gpios)
+#define MOTORX_ENABLE_FLAGS DT_GPIO_FLAGS (MOTORX_ENABLE_NODE, gpios)
+
+/*--------------------------------------------------------------------------*/
+
+#define MOTORY_DIR_NODE DT_PATH (motor2_pins, dir)
+#define MOTORY_DIR_LABEL DT_GPIO_LABEL (MOTORY_DIR_NODE, gpios)
+#define MOTORY_DIR_PIN DT_GPIO_PIN (MOTORY_DIR_NODE, gpios)
+#define MOTORY_DIR_FLAGS DT_GPIO_FLAGS (MOTORY_DIR_NODE, gpios)
+
+#define MOTORY_STEP_NODE DT_PATH (motor2_pins, step)
+#define MOTORY_STEP_LABEL DT_GPIO_LABEL (MOTORY_STEP_NODE, gpios)
+#define MOTORY_STEP_PIN DT_GPIO_PIN (MOTORY_STEP_NODE, gpios)
+#define MOTORY_STEP_FLAGS DT_GPIO_FLAGS (MOTORY_STEP_NODE, gpios)
+
+#define MOTORY_ENABLE_NODE DT_PATH (motor2_pins, enable)
+#define MOTORY_ENABLE_LABEL DT_GPIO_LABEL (MOTORY_ENABLE_NODE, gpios)
+#define MOTORY_ENABLE_PIN DT_GPIO_PIN (MOTORY_ENABLE_NODE, gpios)
+#define MOTORY_ENABLE_FLAGS DT_GPIO_FLAGS (MOTORY_ENABLE_NODE, gpios)
+
+/*--------------------------------------------------------------------------*/
+
+#define MOTORZ_DIR_NODE DT_PATH (motorz_pins, dir)
+#define MOTORZ_DIR_LABEL DT_GPIO_LABEL (MOTORZ_DIR_NODE, gpios)
+#define MOTORZ_DIR_PIN DT_GPIO_PIN (MOTORZ_DIR_NODE, gpios)
+#define MOTORZ_DIR_FLAGS DT_GPIO_FLAGS (MOTORZ_DIR_NODE, gpios)
+
+#define MOTORZ_STEP_NODE DT_PATH (motorz_pins, step)
+#define MOTORZ_STEP_LABEL DT_GPIO_LABEL (MOTORZ_STEP_NODE, gpios)
+#define MOTORZ_STEP_PIN DT_GPIO_PIN (MOTORZ_STEP_NODE, gpios)
+#define MOTORZ_STEP_FLAGS DT_GPIO_FLAGS (MOTORZ_STEP_NODE, gpios)
+
+#define MOTORZ_ENABLE_NODE DT_PATH (motorz_pins, enable)
+#define MOTORZ_ENABLE_LABEL DT_GPIO_LABEL (MOTORZ_ENABLE_NODE, gpios)
+#define MOTORZ_ENABLE_PIN DT_GPIO_PIN (MOTORZ_ENABLE_NODE, gpios)
+#define MOTORZ_ENABLE_FLAGS DT_GPIO_FLAGS (MOTORZ_ENABLE_NODE, gpios)
 
 // Define homing/hard limit switch input pins and limit interrupt vectors.
 // NOTE: All limit bit pins must be on the same port, but not on a port with other input pins (CONTROL).

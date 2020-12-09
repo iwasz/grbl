@@ -20,28 +20,33 @@
 
 #ifndef coolant_control_h
 #define coolant_control_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#define COOLANT_NO_SYNC     false
-#define COOLANT_FORCE_SYNC  true
+#define COOLANT_NO_SYNC false
+#define COOLANT_FORCE_SYNC true
 
-#define COOLANT_STATE_DISABLE   0  // Must be zero
-#define COOLANT_STATE_FLOOD     PL_COND_FLAG_COOLANT_FLOOD
-#define COOLANT_STATE_MIST      PL_COND_FLAG_COOLANT_MIST
-
+#define COOLANT_STATE_DISABLE 0 // Must be zero
+#define COOLANT_STATE_FLOOD PL_COND_FLAG_COOLANT_FLOOD
+#define COOLANT_STATE_MIST PL_COND_FLAG_COOLANT_MIST
 
 // Initializes coolant control pins.
-void coolant_init();
+void coolant_init ();
 
 // Returns current coolant output state. Overrides may alter it from programmed state.
-uint8_t coolant_get_state();
+uint8_t coolant_get_state ();
 
 // Immediately disables coolant pins.
-void coolant_stop();
+void coolant_stop ();
 
 // Sets the coolant pins according to state specified.
-void coolant_set_state(uint8_t mode);
+void coolant_set_state (uint8_t mode);
 
 // G-code parser entry-point for setting coolant states. Checks for and executes additional conditions.
-void coolant_sync(uint8_t mode);
+void coolant_sync (uint8_t mode);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

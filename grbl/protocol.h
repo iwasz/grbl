@@ -21,6 +21,9 @@
 
 #ifndef protocol_h
 #define protocol_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Line buffer size from the serial input stream to be executed.
 // NOTE: Not a problem except for extreme cases, but the line buffer size can be too small
@@ -29,21 +32,24 @@
 // memory space we can invest into here or we re-write the g-code parser not to have this
 // buffer.
 #ifndef LINE_BUFFER_SIZE
-  #define LINE_BUFFER_SIZE 80
+#define LINE_BUFFER_SIZE 80
 #endif
 
 // Starts Grbl main loop. It handles all incoming characters from the serial port and executes
 // them as they complete. It is also responsible for finishing the initialization procedures.
-void protocol_main_loop();
+void protocol_main_loop ();
 
 // Checks and executes a realtime command at various stop points in main program
-void protocol_execute_realtime();
-void protocol_exec_rt_system();
+void protocol_execute_realtime ();
+void protocol_exec_rt_system ();
 
 // Executes the auto cycle feature, if enabled.
-void protocol_auto_cycle_start();
+void protocol_auto_cycle_start ();
 
 // Block until all buffered steps are executed
-void protocol_buffer_synchronize();
+void protocol_buffer_synchronize ();
 
+#ifdef __cplusplus
+}
+#endif
 #endif

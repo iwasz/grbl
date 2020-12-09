@@ -21,39 +21,42 @@
 
 #ifndef stepper_h
 #define stepper_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef SEGMENT_BUFFER_SIZE
-  #define SEGMENT_BUFFER_SIZE 6
+#define SEGMENT_BUFFER_SIZE 6
 #endif
 
 // Initialize and setup the stepper motor subsystem
-void stepper_init();
+void stepper_init ();
 
 // Enable steppers, but cycle does not start unless called by motion control or realtime command.
-void st_wake_up();
+void st_wake_up ();
 
 // Immediately disables steppers
-void st_go_idle();
-
-// Generate the step and direction port invert masks.
-void st_generate_step_dir_invert_masks();
+void st_go_idle ();
 
 // Reset the stepper subsystem variables
-void st_reset();
+void st_reset ();
 
 // Changes the run state of the step segment buffer to execute the special parking motion.
-void st_parking_setup_buffer();
+void st_parking_setup_buffer ();
 
 // Restores the step segment buffer to the normal run state after a parking motion.
-void st_parking_restore_buffer();
+void st_parking_restore_buffer ();
 
 // Reloads step segment buffer. Called continuously by realtime execution system.
-void st_prep_buffer();
+void st_prep_buffer ();
 
 // Called by planner_recalculate() when the executing block is updated by the new plan.
-void st_update_plan_block_parameters();
+void st_update_plan_block_parameters ();
 
 // Called by realtime status reporting if realtime rate reporting is enabled in config.h.
-float st_get_realtime_rate();
+float st_get_realtime_rate ();
 
+#ifdef __cplusplus
+}
+#endif
 #endif
